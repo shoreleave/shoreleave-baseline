@@ -2730,23 +2730,23 @@ cljs.core._hash["boolean"] = function(a) {
 cljs.core.IWithMeta["function"] = !0;
 cljs.core._with_meta["function"] = function(a, b) {
   return cljs.core.with_meta.call(null, function() {
-    if(void 0 === cljs.core.t8234) {
-      cljs.core.t8234 = {};
-      cljs.core.t8234 = function(a, b, c) {
+    if(void 0 === cljs.core.t14976) {
+      cljs.core.t14976 = {};
+      cljs.core.t14976 = function(a, b, c) {
         this.meta = a;
         this.f = b;
-        this.meta8235 = c;
+        this.meta14977 = c;
         this.cljs$lang$protocol_mask$partition1$ = 0;
         this.cljs$lang$protocol_mask$partition0$ = 393217
       };
-      cljs.core.t8234.cljs$lang$type = !0;
-      cljs.core.t8234.cljs$lang$ctorPrSeq = function() {
-        return cljs.core.list.call(null, "cljs.core/t8234")
+      cljs.core.t14976.cljs$lang$type = !0;
+      cljs.core.t14976.cljs$lang$ctorPrSeq = function() {
+        return cljs.core.list.call(null, "cljs.core/t14976")
       };
-      cljs.core.t8234.cljs$lang$ctorPrWriter = function(a, b) {
-        return cljs.core._write.call(null, b, "cljs.core/t8234")
+      cljs.core.t14976.cljs$lang$ctorPrWriter = function(a, b) {
+        return cljs.core._write.call(null, b, "cljs.core/t14976")
       };
-      var c = cljs.core.t8234.prototype, d = function(a, b) {
+      var c = cljs.core.t14976.prototype, d = function(a, b) {
         return cljs.core.apply.call(null, a.f, b)
       }, e = function(a, b) {
         var a = this, c = null;
@@ -2760,19 +2760,19 @@ cljs.core._with_meta["function"] = function(a, b) {
       };
       e.cljs$lang$arity$variadic = d;
       c.call = e;
-      cljs.core.t8234.prototype.apply = function(a, b) {
+      cljs.core.t14976.prototype.apply = function(a, b) {
         a = this;
         return a.call.apply(a, [a].concat(b.slice()))
       };
-      cljs.core.t8234.prototype.cljs$core$Fn$ = !0;
-      cljs.core.t8234.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
-        return this.meta8235
+      cljs.core.t14976.prototype.cljs$core$Fn$ = !0;
+      cljs.core.t14976.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
+        return this.meta14977
       };
-      cljs.core.t8234.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
-        return new cljs.core.t8234(this.meta, this.f, b)
+      cljs.core.t14976.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
+        return new cljs.core.t14976(this.meta, this.f, b)
       }
     }
-    return new cljs.core.t8234(b, a, null)
+    return new cljs.core.t14976(b, a, null)
   }(), b)
 };
 cljs.core.IMeta["function"] = !0;
@@ -20824,12 +20824,6 @@ shoreleave.common.toggle_brepl = function() {
 }();
 baseline.client.render = {};
 baseline.client.main = {};
-baseline.client.main.query_args = shoreleave.common.query_args_map.call(null);
-baseline.client.main.hash_args = shoreleave.common.hash_args_map.call(null);
-shoreleave.common.toggle_brepl.call(null, baseline.client.main.query_args, "\ufdd0'repl");
-shoreleave.remotes.http_rpc.remote_callback.call(null, "api/ping-the-api", cljs.core.PersistentVector.fromArray(["Testing..."], !0), function(a) {
-  return alert(a)
-});
 shoreleave.pubsubs.simple = {};
 goog.pubsub.PubSub.prototype.cljs$core$IHash$ = !0;
 goog.pubsub.PubSub.prototype.cljs$core$IHash$_hash$arity$1 = function(a) {
