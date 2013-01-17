@@ -17,11 +17,11 @@ It builds upon efforts found in other ClojureScript projects, such as [Fetch](ht
 Shoreleave-baseline Overview
 ----------------------------
 Shoreleave-baseline is a starting point for building applications with Ring+Compojure+lib-noir+Shoreleave.
-It fills the same role as ClojureScript:One - it is an example/foundation, that you can build up from.
+It fills the same role as ClojureScript:One - it is an example/foundation from which you can build up.
 
 There are four branches within the repo:
 
- * `clean` involves almost no code.  It's just a basic template that you can fill in and customize.
+ * `clean` involves almost no code.  It's a minimal, running template app that you can fill in and customize.
  * `master` involves trivial code that illustrates proper usage of the most common Shoreleave modules.
  * `kitchensink` involves ALL Shoreleave modules working in concert.  This is great to smoketest Shoreleave.
  * `incubator` involves all new features being tested or developed for Shoreleave.  *DO NOT USE THIS BRANCH*
@@ -31,7 +31,7 @@ Shoreleave-baseline is already wired up to do a host of best-practices for web a
 This includes, but is not limited to client-side caching, compression, and CSRF protection (all via Ring Middleware).
 
 A sane file structure has been imposed on the example, as well as smart default options.
-A central config file for the app can be found in `resources/config.edn` and can be access through the `config` namespace.
+A central config file for the app can be found at `resources/config.edn` and is accessed through the `config` namespace.
 
 The compiled JavaScript file is also included in every branch, to ensure there is always a runnable example.
 
@@ -50,6 +50,7 @@ TBD
 Plays well with others
 ----------------------
 Shoreleave makes no assumptions about other libraries you might be using in your application.
+
 You should extend the example in anyway that makes sense.
 
 
