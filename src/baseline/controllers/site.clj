@@ -1,9 +1,5 @@
 (ns baseline.controllers.site)
 
-(defn index [session]
-  ;(common/render "Hello World")
-  (str "Hello.  Your session is: " session)
-  )
+(defn index []
+  "Hello World.")
 
-(defn test-shoreleave []
-  (slurp "resources/public/html/test.html"))
