@@ -1,5 +1,5 @@
 (defproject shoreleave-baseline "0.3.0"
-  :description "A baseline application to get started with a Compojure+Shoreleave"
+  :description "A baseline application to get started with Compojure+Shoreleave"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
