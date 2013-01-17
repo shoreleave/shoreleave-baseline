@@ -17,8 +17,7 @@
 ;; Controller routes, ROA oriented
 ;; -------------------------------
 (defroutes site
-  (GET "/" {session :session} (cont-site/index session))
-  (GET "/test" [] (cont-site/test-shoreleave)))
+  (GET "/" [] (cont-site/index)))
 
 ;; Core system routes
 ;; ------------------
