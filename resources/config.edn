@@ -1,0 +1,11 @@
+{
+  ;; Core config
+  ;; -----------
+  :baseline-port 8080
+  
+  ;; Sessions and Cookies
+  ;; --------------------
+  :session-key "s0mes3cret"
+  :session-max-age-seconds 1209600
+}
+
