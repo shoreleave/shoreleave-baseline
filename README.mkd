@@ -32,6 +32,7 @@ This includes, but is not limited to client-side caching, compression, and CSRF 
 
 A sane file structure has been imposed on the example, as well as smart default options.
 A central config file for the app can be found at `resources/config.edn` and is accessed through the `config` namespace.
+The config system can easily be replaced with [environ](https://github.com/weavejester/environ) or [carica](https://github.com/sonian/carica).
 
 The compiled JavaScript file is also included in every branch, to ensure there is always a runnable example.
 
