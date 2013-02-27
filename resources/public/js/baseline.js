@@ -358,6 +358,13 @@ goog.base = function(a, b, c) {
 goog.scope = function(a) {
   a.call(goog.global)
 };
+goog.debug = {};
+goog.debug.Error = function(a) {
+  Error.captureStackTrace ? Error.captureStackTrace(this, goog.debug.Error) : this.stack = Error().stack || "";
+  a && (this.message = String(a))
+};
+goog.inherits(goog.debug.Error, Error);
+goog.debug.Error.prototype.name = "CustomError";
 goog.string = {};
 goog.string.Unicode = {NBSP:"\u00a0"};
 goog.string.startsWith = function(a, b) {
@@ -687,13 +694,6 @@ goog.string.parseInt = function(a) {
   isFinite(a) && (a = String(a));
   return goog.isString(a) ? /^\s*-?0x/i.test(a) ? parseInt(a, 16) : parseInt(a, 10) : NaN
 };
-goog.debug = {};
-goog.debug.Error = function(a) {
-  Error.captureStackTrace ? Error.captureStackTrace(this, goog.debug.Error) : this.stack = Error().stack || "";
-  a && (this.message = String(a))
-};
-goog.inherits(goog.debug.Error, Error);
-goog.debug.Error.prototype.name = "CustomError";
 goog.asserts = {};
 goog.asserts.ENABLE_ASSERTS = goog.DEBUG;
 goog.asserts.AssertionError = function(a, b) {
@@ -2730,23 +2730,23 @@ cljs.core._hash["boolean"] = function(a) {
 cljs.core.IWithMeta["function"] = !0;
 cljs.core._with_meta["function"] = function(a, b) {
   return cljs.core.with_meta.call(null, function() {
-    if(void 0 === cljs.core.t8234) {
-      cljs.core.t8234 = {};
-      cljs.core.t8234 = function(a, b, c) {
+    if(void 0 === cljs.core.t5582) {
+      cljs.core.t5582 = {};
+      cljs.core.t5582 = function(a, b, c) {
         this.meta = a;
         this.f = b;
-        this.meta8235 = c;
+        this.meta5583 = c;
         this.cljs$lang$protocol_mask$partition1$ = 0;
         this.cljs$lang$protocol_mask$partition0$ = 393217
       };
-      cljs.core.t8234.cljs$lang$type = !0;
-      cljs.core.t8234.cljs$lang$ctorPrSeq = function() {
-        return cljs.core.list.call(null, "cljs.core/t8234")
+      cljs.core.t5582.cljs$lang$type = !0;
+      cljs.core.t5582.cljs$lang$ctorPrSeq = function() {
+        return cljs.core.list.call(null, "cljs.core/t5582")
       };
-      cljs.core.t8234.cljs$lang$ctorPrWriter = function(a, b) {
-        return cljs.core._write.call(null, b, "cljs.core/t8234")
+      cljs.core.t5582.cljs$lang$ctorPrWriter = function(a, b) {
+        return cljs.core._write.call(null, b, "cljs.core/t5582")
       };
-      var c = cljs.core.t8234.prototype, d = function(a, b) {
+      var c = cljs.core.t5582.prototype, d = function(a, b) {
         return cljs.core.apply.call(null, a.f, b)
       }, e = function(a, b) {
         var a = this, c = null;
@@ -2760,19 +2760,19 @@ cljs.core._with_meta["function"] = function(a, b) {
       };
       e.cljs$lang$arity$variadic = d;
       c.call = e;
-      cljs.core.t8234.prototype.apply = function(a, b) {
+      cljs.core.t5582.prototype.apply = function(a, b) {
         a = this;
         return a.call.apply(a, [a].concat(b.slice()))
       };
-      cljs.core.t8234.prototype.cljs$core$Fn$ = !0;
-      cljs.core.t8234.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
-        return this.meta8235
+      cljs.core.t5582.prototype.cljs$core$Fn$ = !0;
+      cljs.core.t5582.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
+        return this.meta5583
       };
-      cljs.core.t8234.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
-        return new cljs.core.t8234(this.meta, this.f, b)
+      cljs.core.t5582.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
+        return new cljs.core.t5582(this.meta, this.f, b)
       }
     }
-    return new cljs.core.t8234(b, a, null)
+    return new cljs.core.t5582(b, a, null)
   }(), b)
 };
 cljs.core.IMeta["function"] = !0;
@@ -18719,19 +18719,21 @@ shoreleave.services.geo.include_js = function() {
 };
 shoreleave.services.geo.geocoder = function() {
   try {
-    return void 0 === google ? shoreleave.services.geo.include_js.call(null) : null
+    void 0 === google && shoreleave.services.geo.include_js.call(null)
   }catch(a) {
     if(cljs.core.instance_QMARK_.call(null, Error, a)) {
-      return shoreleave.services.geo.include_js.call(null)
+      shoreleave.services.geo.include_js.call(null)
+    }else {
+      throw a;
     }
-    throw a;
   }finally {
     new google.maps.Geocoder
   }
+  return new google.maps.Geocoder
 };
 shoreleave.services.geo.mapify_location = function(a) {
-  var b = cljs.core.nth.call(null, a, 0, null), a = b.geometry.location.lat(), b = b.geometry.location.lng();
-  return cljs.core.ObjMap.fromObject(["\ufdd0'lat", "\ufdd0'lng", "\ufdd0'latlng-str", "\ufdd0'formatted"], {"\ufdd0'lat":a, "\ufdd0'lng":b, "\ufdd0'latlng-str":[cljs.core.str(a), cljs.core.str(","), cljs.core.str(b)].join(""), "\ufdd0'formatted":geo_objformatted_address})
+  var a = cljs.core.nth.call(null, a, 0, null), b = a.geometry.location.lat, c = a.geometry.location.lng;
+  return cljs.core.ObjMap.fromObject(["\ufdd0'lat", "\ufdd0'lng", "\ufdd0'latlng-str", "\ufdd0'formatted"], {"\ufdd0'lat":b, "\ufdd0'lng":c, "\ufdd0'latlng-str":[cljs.core.str(b), cljs.core.str(","), cljs.core.str(c)].join(""), "\ufdd0'formatted":a.formatted_address})
 };
 shoreleave.services.geo.normalize_location = function() {
   var a = null, b = function(b, c) {
@@ -20830,6 +20832,11 @@ shoreleave.common.toggle_brepl.call(null, baseline.client.main.query_args, "\ufd
 shoreleave.remotes.http_rpc.remote_callback.call(null, "api/ping-the-api", cljs.core.PersistentVector.fromArray(["Testing..."], !0), function(a) {
   return alert(a)
 });
+shoreleave.remotes.http_rpc.remote_callback.call(null, "api/this-is-404", cljs.core.PersistentVector.fromArray(["Failure"], !0), cljs.core.ObjMap.fromObject(["\ufdd0'on-error", "\ufdd0'on-success"], {"\ufdd0'on-error":function() {
+  return alert("Remotes correctly handle error conditions")
+}, "\ufdd0'on-success":function() {
+  return alert("You should never see this")
+}}));
 shoreleave.pubsubs.simple = {};
 goog.pubsub.PubSub.prototype.cljs$core$IHash$ = !0;
 goog.pubsub.PubSub.prototype.cljs$core$IHash$_hash$arity$1 = function(a) {
