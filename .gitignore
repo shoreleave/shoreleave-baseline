@@ -15,6 +15,7 @@ pom.xml
 .lein-failures
 .lein-cljsbuild-repl
 /.lein-plugins
+.lein-repl-history
 repl-port
 
 # Python
