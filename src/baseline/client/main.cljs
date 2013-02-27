@@ -18,6 +18,12 @@
 (common/toggle-brepl query-args :repl)
 
 ;; ### Confirm we have remote-calling activated
-(srm/rpc (api/ping-the-api "Testing...") [pong-response]
-  (js/alert pong-response))
+(srm/rpc
+  (api/ping-the-api "Testing...") [pong-response]
+    (js/alert pong-response))
+
+(srm/rpc
+  (api/this-is-404 "Failure") [api-response]
+    :on-success (js/alert "You should never see this")
+    :on-error (js/alert "Remotes correctly handle error conditions"))
 
