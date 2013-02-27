@@ -1,9 +1,9 @@
 (defproject shoreleave-baseline "0.3.0"
   :description "A baseline application to get started with a Compojure+Shoreleave"
-  :url "http://example.com/FIXME"
+  :url "https://github.com/shoreleave/shoreleave-baseline"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.5.0-RC1"]
+  :dependencies [[org.clojure/clojure "1.5.0-RC17"]
                  [org.clojure/tools.reader "0.7.0"]
                  [compojure "1.1.5" :exclusions [org.clojure/clojure]]
                  [lib-noir "0.4.7" :exclusions [[org.clojure/clojure]
