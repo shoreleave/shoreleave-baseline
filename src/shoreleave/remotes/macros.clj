@@ -3,7 +3,10 @@
 (defmacro rpc
   [[sym & params] & [destruct & body]]
   (let [func (if destruct
-               `(fn ~destruct ~@body)
+               (if (some #{:on-success :on-error} body)
+                 (reduce (fn [callback-map [k v-form]] (assoc callback-map k `(fn ~destruct ~v-form)))
+                         {} (apply hash-map body))
+                 `(fn ~destruct ~@body))
                nil)]
     `(shoreleave.remotes.http-rpc/remote-callback ~(str sym)
                                                   ~(vec params)
