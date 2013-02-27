@@ -24,12 +24,12 @@
   :ring {:handler baseline.handler/war-handler
          :init baseline.handler/init
          :destroy baseline.handler/destroy}
-   :cljsbuild {:builds [{:source-path "src",
-                        :compiler {:output-dir "resources/build/cljs",
-                                   :output-to "resources/public/js/baseline.js",
-                                   ;:externs  ["externs/jquery.js"],
-                                   :optimizations :simple,;:advanced ;:whitespace
-                                   :pretty-print true}}]}
+   :cljsbuild {:builds [{:source-paths ["src"],
+                         :compiler {:output-dir "resources/build/cljs",
+                                    :output-to "resources/public/js/baseline.js",
+                                    ;:externs  ["externs/jquery.js"],
+                                    :optimizations :simple,;:advanced ;:whitespace
+                                    :pretty-print true}}]}
   :profiles {:production 
              {:ring {:open-browser? false, :stacktraces? false, :auto-reload? false}}}
   
