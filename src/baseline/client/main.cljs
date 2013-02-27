@@ -12,9 +12,9 @@
 ;Where process-search is the main action to take when processing the page/url
 
 ;; ### Browser REPL
-;; If you add a `repl` as a query-string arg, even on the live Barker,
+;; If you add a `repl` as a query-string arg, even on the live Baseline,
 ;; You can remotely interact with the site from the local REPL
-;; Visit: `http://127.0.0.1:8080/search?repl=yes#q=sat`
+;; Visit: `http://127.0.0.1:8080/test?repl=yes#q=something+else`
 (common/toggle-brepl query-args :repl)
 
 ;; ### Confirm we have remote-calling activated
