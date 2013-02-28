@@ -1,4 +1,5 @@
 (ns baseline.routes
+  "Application routes via Compjure routing"
   (:require [compojure.core :as c-core :refer [defroutes
                                                GET POST PUT DELETE
                                                HEAD OPTIONS PATCH

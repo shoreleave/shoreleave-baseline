@@ -7,7 +7,7 @@
 ;; You can think of this as a client side "controller"
 
 ;; Here is a atom'd hashmap - a great choice for storing state.
-;; Unlike localStore, it's not attached to the DOM, so it's fast and easy to access.
+;; Unlike localStorage, it's not attached to the DOM, so it's fast and easy to access.
 ;; If you look in `flows.cljs`, you'll see how atoms can participate in the Pub/Sub system.
 (def quick-store (atom {:b 5}))
 

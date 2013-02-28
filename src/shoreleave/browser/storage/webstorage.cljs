@@ -4,6 +4,8 @@
             [goog.storage.mechanism.HTML5WebStorage :as html5webstorage]
             [goog.iter :as g-iter]))
 
+;; Google Closure attaches a common prototype to all browser storage systems called, `WebStorage`.
+;; Shoreleave extends this type, to extend ClojureScript functionality/interop to all browsers storages.
 
 ;; WebStorage support
 ;; ----------------------

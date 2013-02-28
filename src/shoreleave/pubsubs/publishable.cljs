@@ -8,6 +8,7 @@
 ;;
 ;; ###Functions and Function types
 ;; Functions need to be decorated (much like how `memoize` works).
+;; This is now supported by CLJS core - ported from Shoreleave.
 ;;
 ;; For example:
 ;;
@@ -32,8 +33,8 @@
 ;; 
 ;; All subscribed functions will be passed a map: `{:old some-val :new another-val}`
 ;;
-;; ###LocalStorage
-;; localStorage behaves exactly like an atom, as described above
+;; ###Browser storages (localStorage and sessionStorage)
+;; All storage systems behave exactly like an atom, as described above
 ;;
 ;; ###WorkerFn
 ;; Embedded workers behave exactly like atoms, as described above
@@ -73,9 +74,6 @@
         (add-watch atom-as-topic bus-key #(ps-protocols/publish bus published-topic {:old %3 :new %4}))
         atom-as-topic)))
 
-  string
-  (topicify [t] t)
-
   ;; this could be a Fn that we attached metadata to - for some reason it gets hit like an obj, instead of a fn 
   object
   (topicify [t]
@@ -84,14 +82,18 @@
   (publishized? [t]
     (:sl-published (meta t)))
   
+  string
+  (topicify [t] t)
+
   default
   (topicify [t]
     (name t)))
 
-
+;; Local Storage
+;; -------------
+;; It is expected that before calling this, you've handled your depenencies, ala
+;;  `(:require [goog.storage.mechanism.HTML5LocalStorage :as gls])`
 (defn include-localstorage! []
-  ;; It is expected that before calling this, you've handled your depenencies, ala
-  ;;  `(:require [goog.storage.mechanism.HTML5LocalStorage :as gls])`
   (extend-type goog.storage.mechanism.HTML5LocalStorage
 
     ps-protocols/IPublishable
@@ -107,9 +109,11 @@
           (add-watch ls-as-topic bus-key #(ps-protocols/publish bus published-topic {:old %3 :new %4}))
           ls-as-topic)))))
 
+;; Session Storage
+;; -------------
+;; It is expected that before calling this, you've handled your depenencies, ala
+;;  `(:require [goog.storage.mechanism.HTML5SessionStorage :as glss])`
 (defn include-sessionstorage! []
-  ;; It is expected that before calling this, you've handled your depenencies, ala
-  ;;  `(:require [goog.storage.mechanism.HTML5SessionStorage :as gss])`
   (extend-type goog.storage.mechanism.HTML5SessionStorage
 
     ps-protocols/IPublishable
@@ -126,7 +130,10 @@
           ss-as-topic)))))
 
 
-;; TODO remove this - it was a bad idea
+;; This is left in the code for historical reasons,
+;; You can use it as an example on how to build custom
+;; function decorators in ClojureScript, correctly use the Blob system,
+;; generate new Object URLs, and how WebWorkers execute.
 #_(defn include-workers
   "Allow WebWorkers to participate in the PubSub system
   NOTE: This means your browser supports BlobBuilder or Blob"

@@ -1,4 +1,5 @@
 (ns baseline.server
+  "Server handles for repl development and `run` hooks"
   (:require [baseline.config :refer [config]]
             [baseline.handler :as handler]
             [ring.server.standalone :as ring-server]))

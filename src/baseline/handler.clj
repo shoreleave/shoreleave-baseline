@@ -1,4 +1,5 @@
-(ns baseline.handler 
+(ns baseline.handler
+ "The app-specific Ring handler" 
   (:require [compojure.handler :as handler]
             [baseline.routes :as routes]
             [baseline.config :refer [config]]
@@ -9,14 +10,24 @@
             [shoreleave.middleware.rpc]
             [hiccup.middleware]))
 
+;; This is the main entry point into the application.
+;; We wire up or middleware, attach our routes, and expose
+;; the final application Handler.
+
+;; This is the system initialization called by Ring.
+;; It's often used to create files or otherwise prepare all system settings needed
 (defn init []
   (println "The baseline app is starting"))
 
+;; Like `init` this is the destroy Ring hook - it's used to cleanup
 (defn destroy []
   (println "The baseline app has been shut down"))
 
 (def app routes/all-routes)
 
+;; Ring middleware are all Handler decorators.
+;; That is, they take handlers, wrap around them, and return a new handler.
+;; Here we build up all the middleware we need by threading our `app` (a top-level handler) through
 (defn get-handler [app]
   (-> app
     (shoreleave.middleware.rpc/wrap-rpc)

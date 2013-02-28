@@ -18,13 +18,14 @@
 ;;
 ;; Here's diagram of what's happening below:
 ;;
-;; Button Click
-;;  \---> Fn returning a map
-;;         \---> Updating local storage with the new map
-;;          \      \---> Sending a message back to the server ---> Echoing the response to the console
-;;           \      \                                               \---> popping up an alert
-;;            \      \---> Echoing LS to the console                 \---> echo the value of :kitchen-sink from ls
-;;             \---> Print out to console
+;;     Button Click
+;;      \---> Fn returning a map
+;;             \---> Updating local storage with the new map
+;;              \      \---> Sending a message back to the server
+;;               \      \     \---> Echoing the response to the console
+;;                \      \                                      \---> popping up an alert
+;;                 \      \---> Echoing LS to the console        \---> echo the value of :kitchen-sink from ls
+;;                  \---> Print out to console
 
 (def bus (pbus/bus))
 (pcore/include-localstorage!)

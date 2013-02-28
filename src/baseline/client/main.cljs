@@ -1,4 +1,5 @@
 (ns baseline.client.main
+  "The main entry point for the client side application"
   (:require [shoreleave.common :as common]
             [shoreleave.browser.history :as history]
             [baseline.client.flows]) ;; this wires the application up
@@ -19,10 +20,13 @@
 (common/toggle-brepl query-args :repl)
 
 ;; ### Confirm we have remote-calling activated
+;; Also notice how the remote call is namespaced to our API (`api/ping-the-api`).
 (srm/rpc
   (api/ping-the-api "Testing...") [pong-response]
     (js/alert pong-response))
 
+;; The `rpc` macro can optionally take a keyed-body,
+;; allowing you to specify error handlers.
 (srm/rpc
   (api/this-is-404 "Failure") [api-response]
     :on-success (js/alert "You should never see this")

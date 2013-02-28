@@ -2,6 +2,18 @@
   "Ring middleware to prevent CSRF attacks with an anti-forgery token."
   (:require [crypto.random :as random]))
 
+;; ###Attention
+;; This is a fork of the original anti-forgery middleware.
+;; The original middleware has abandoned the use of a CSRF cookie for the double submit,
+;; and instead has opted to embed the token value into the session directly.
+;;
+;; While this is acceptable for server-side only solutions, it prevents 
+;; Domain/origin-scoped JavaScript from having access to the token value.
+;; This fork enables the use and comparison of a session CSRF token **and** a CSRF cookie
+;; for double submit validation.
+;; This change ensures that all communication between baseline client
+;; and server are CSRF-protected.
+
 (def ^:dynamic
   ^{:doc "Binding that stores a anti-forgery token that must be included
           in POST forms if the handler is wrapped in wrap-anti-forgery."}

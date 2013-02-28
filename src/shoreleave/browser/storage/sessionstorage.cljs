@@ -52,9 +52,9 @@
 
 
 ;; ###Usage
-;; You'll typically do something like: `(def local-storage (localstorage/storage)`
+;; You'll typically do something like: `(def session-storage (sessionstorage/storage)`
 (defn storage
-  "Get the browser's localStorage"
+  "Get the browser's sessionStorage"
   []
   (goog.storage.mechanism.HTML5SessionStorage.))
 
