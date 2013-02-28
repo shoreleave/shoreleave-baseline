@@ -21,6 +21,7 @@
 ;;
 ;;  * subscribe - for a given bus, bind the handler-fn to the topic.
 ;;  * subscribe-once - for a given bus, create a one-time binding between the topic and the handler-fn
+;;  * subscribe-> - for a given bus, create a chain of subscriptions, similar to how the threading macro works
 ;;  * unsubscribe - for a given bus, unbind the handler-fn and the topic
 ;;  * publish - for a given bus, publish data to all the handler-fn's bound to the topic
 (defprotocol IMessageBrokerBus
@@ -62,8 +63,8 @@
 ;; The second protocol is used to define things that can be published,
 ;; _ie:_ things that be used as a topic.
 ;;
-;; Publishables are usually constructed as a decorator (using Shoreleave's
-;; Function type), or as an adapter to IWatchable interfaces
+;; Publishables are usually constructed as a decorator (which result in a
+;; Function object containing metadata), or as an adapter to IWatchable interfaces.
 ;;
 ;; A Publishable knows how to make a string-based topic of itself (`topicify`),
 ;; can tell if it has already been decorated (`publishized?`), and can generate

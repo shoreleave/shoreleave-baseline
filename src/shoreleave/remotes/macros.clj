@@ -1,4 +1,9 @@
-(ns shoreleave.remotes.macros)
+(ns shoreleave.remotes.macros
+  "Macros to smooth over the use of RPC")
+
+;; The macro calls are preferred to the raw calls.
+;; Handling the "remote-name" correctly can be troublesome,
+;; and the macro ensures uniform handling.
 
 (defmacro rpc
   [[sym & params] & [destruct & body]]
