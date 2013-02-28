@@ -1,6 +1,7 @@
 (ns baseline.client.main
   (:require [shoreleave.common :as common]
-            [shoreleave.browser.history :as history])
+            [shoreleave.browser.history :as history]
+            [baseline.client.flows]) ;; this wires the application up
   (:require-macros  [shoreleave.remotes.macros :as srm]))
 
 (def query-args (common/query-args-map))
