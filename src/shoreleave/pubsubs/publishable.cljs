@@ -1,4 +1,4 @@
-(ns shoreleave.pubsub.publishable
+(ns shoreleave.pubsubs.publishable
   (:require [shoreleave.pubsubs.protocols :as ps-protocols]))
 
 ;; Publishables
@@ -73,28 +73,58 @@
         (add-watch atom-as-topic bus-key #(ps-protocols/publish bus published-topic {:old %3 :new %4}))
         atom-as-topic)))
 
- 
+  string
+  (topicify [t] t)
+
+  ;; this could be a Fn that we attached metadata to - for some reason it gets hit like an obj, instead of a fn 
+  object
+  (topicify [t]
+    (or (ps-protocols/publishized? t)
+        (-> t hash str)))
+  (publishized? [t]
+    (:sl-published (meta t)))
+  
   default
   (topicify [t]
-    (str t)))
+    (name t)))
 
-(defn include-localstorage []
- ;; This is currently removed until a cross-browser (or goog-jar) approach is stablized
-  ;(extend-protocol ps-protocols/IPublishable
 
-  ;  js/localStorage
-  ;  (topicify [t]
-  ;    (or (ps-protocols/publishized? t)
-  ;        (-> t hash str)))
-  ;  (ps-protocols/publishized? [t]
-  ;    (-> t hash str))
-  ;  (publishize [ls-as-topic bus]
-  ;    (let [published-topic (topicify ls-as-topic)
-  ;          bus-key (-> bus hash keyword)]
-  ;      (do
-  ;        (add-watch ls-as-topic bus-key #(publish bus published-topic {:old %3 :new %4}))
-  ;        ls-as-topic))))
-  )
+(defn include-localstorage! []
+  ;; It is expected that before calling this, you've handled your depenencies, ala
+  ;;  `(:require [goog.storage.mechanism.HTML5LocalStorage :as gls])`
+  (extend-type goog.storage.mechanism.HTML5LocalStorage
+
+    ps-protocols/IPublishable
+    (topicify [t]
+      (or (ps-protocols/publishized? t)
+          (-> t hash str)))
+    (publishized? [t]
+      (-> t hash str))
+    (publishize [ls-as-topic bus]
+      (let [published-topic (ps-protocols/topicify ls-as-topic)
+            bus-key (-> bus hash keyword)]
+        (do
+          (add-watch ls-as-topic bus-key #(ps-protocols/publish bus published-topic {:old %3 :new %4}))
+          ls-as-topic)))))
+
+(defn include-sessionstorage! []
+  ;; It is expected that before calling this, you've handled your depenencies, ala
+  ;;  `(:require [goog.storage.mechanism.HTML5SessionStorage :as gss])`
+  (extend-type goog.storage.mechanism.HTML5SessionStorage
+
+    ps-protocols/IPublishable
+    (topicify [t]
+      (or (ps-protocols/publishized? t)
+          (-> t hash str)))
+    (publishized? [t]
+      (-> t hash str))
+    (publishize [ss-as-topic bus]
+      (let [published-topic (ps-protocols/topicify ss-as-topic)
+            bus-key (-> bus hash keyword)]
+        (do
+          (add-watch ss-as-topic bus-key #(ps-protocols/publish bus published-topic {:old %3 :new %4}))
+          ss-as-topic)))))
+
 
 ;; TODO remove this - it was a bad idea
 #_(defn include-workers
