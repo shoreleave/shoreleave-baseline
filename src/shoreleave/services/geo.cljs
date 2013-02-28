@@ -20,17 +20,18 @@
       (include-js))
     (catch js/Error err
       (include-js))
-    (finally (js/google.maps.Geocoder.))))
+    (finally (js/google.maps.Geocoder.)))
+  (js/google.maps.Geocoder.))
 
 ;; TODO: if we want the zip, it's the last element in (.-address_components geo-obj)
 (defn mapify-location [geocode-results]
   (let [[geo-obj] geocode-results
-        lat (.geometry.location.lat geo-obj)
-        lng (.geometry.location.lng geo-obj)]
+        lat (.-geometry.location.lat geo-obj)
+        lng (.-geometry.location.lng geo-obj)]
     {:lat         lat
      :lng         lng
      :latlng-str  (str lat "," lng)
-     :formatted   geo-obj.formatted_address}))
+     :formatted   (.-formatted_address geo-obj)}))
 
 (defn normalize-location
   ([loc-str callback]

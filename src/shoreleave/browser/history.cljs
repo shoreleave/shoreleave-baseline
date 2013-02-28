@@ -23,11 +23,11 @@
 ;; forwards in that history
 ;;
 ;; History events are packaged up as a map with the keys:
-;; `: token :type :navigation?`
+;; `:token :type :navigation?`
 ;;
 ;; `:token` is the location URL associated with this point in history.
 ;; `:type` is the type of history event that was captured. You can ignore this.
-;; `navigation?` is a boolean, True if the event was initiated by a browser,
+;; `:navigation?` is a boolean, True if the event was initiated by a browser,
 ;; or false otherwise
 
 (defn navigate-callback
