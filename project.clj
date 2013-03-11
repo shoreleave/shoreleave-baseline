@@ -3,7 +3,7 @@
   :url "https://github.com/shoreleave/shoreleave-baseline"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.5.0-RC17"]
+  :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/tools.reader "0.7.0"]
                  [compojure "1.1.5" :exclusions [org.clojure/clojure]]
                  [lib-noir "0.4.7" :exclusions [[org.clojure/clojure]
