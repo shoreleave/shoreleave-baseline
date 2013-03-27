@@ -1,5 +1,6 @@
 (ns baseline.client.main
   (:require [shoreleave.common :as common]
+            [shoreleave.remotes.http-rpc]
             [shoreleave.browser.history :as history])
   (:require-macros  [shoreleave.remotes.macros :as srm]))
 
