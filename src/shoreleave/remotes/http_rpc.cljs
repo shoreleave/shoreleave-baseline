@@ -1,7 +1,7 @@
 (ns shoreleave.remotes.http-rpc
   "Remote procedure calls over HTTP"
   (:require [shoreleave.remotes.xhr :as xhr]
-            ;[goog.structs.PriorityPool :as priority]
+                                        ;[goog.structs.PriorityPool :as priority]
             [cljs.reader :as reader]))
 
 ;; HTTP-RPC
@@ -24,6 +24,14 @@
 
 (def ^:dynamic *remote-uri* "/_shoreleave")
 
+(defn read-callback
+  [f]
+  (when f
+    (fn [data]
+      (let [data (if (= data "") "nil" data)]
+        (f (reader/read-string data))))))
+
+
 (defn remote-callback
   "Call a remote-callback on the server.
   Arguments:
@@ -37,24 +45,15 @@
     (let [{:keys [on-success on-error]} callback] ;;TODO make xhr take *ANY* of the event triggers
       (xhr/xhr [:post *remote-uri*]
                :content (merge
-                          {:remote remote
-                           :params (pr-str params)}
-                          (apply hash-map extra-content))
-               :on-success (when on-success
-                             (fn [data]
-                               (let [data (if (= data "") "nil" data)]
-                                 (on-success (reader/read-string data)))))
-               :on-error (when on-error
-                           (fn [data]
-                             (let [data (if (= data "") "nil" data)]
-                               (on-error (reader/read-string data)))))))
+                         {:remote remote
+                          :params (pr-str params)}
+                         (apply hash-map extra-content))
+               :on-success (read-callback on-success)
+               :on-error (read-callback on-error)))
     (xhr/xhr [:post *remote-uri*]
              :content (merge
-                        {:remote remote
-                         :params (pr-str params)}
-                        (apply hash-map extra-content))
-             :on-success (when callback
-                           (fn [data]
-                             (let [data (if (= data "") "nil" data)]
-                               (callback (reader/read-string data))))))))
+                       {:remote remote
+                        :params (pr-str params)}
+                       (apply hash-map extra-content))
+             :on-success (read-callback callback))))
 
